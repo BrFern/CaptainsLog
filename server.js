@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 
 
@@ -11,6 +12,14 @@ app.get("/", (req, res) => {
     res.render("New");
 });
 
+
+//Create Route
+app.post("/logs", (req,res) => {
+    Log.create(req.body, (error, createdLog)=> {
+        res.send(req.body);
+    })
+   
+});
 
 
 
