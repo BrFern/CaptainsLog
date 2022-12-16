@@ -8,10 +8,10 @@ export default class Show extends Component {
       <div>
         <h1> Captain's Log </h1>
         <h2> {logs.title} </h2>
-        <h2> {logs.entry}</h2>
-        <h2> {logs.shipIsBroken}</h2>
-            <a href ='/logs/new'> Return </a>
-
+        <p> {logs.entry}</p>
+        <p> {logs.shipIsBroken?'Ship Broken': "Ship is not broken"}
+        </p>
+            <a href ='/logs'> Return </a>
       </div>
       </body>
     )

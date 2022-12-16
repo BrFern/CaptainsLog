@@ -29,7 +29,7 @@ mongoose.connection.once("open", () => {
 });
 
 //Index
-app.get("/index", (req, res) => {
+app.get("/logs", (req, res) => {
     logs.find({}, (error, allLogs) => {
         res.render("Index", {
             logs: allLogs,
@@ -37,33 +37,17 @@ app.get("/index", (req, res) => {
     });
 });
 
-//Show Route
-app.get("/logs", (req, res) => {
-    logs.findById(req.params.id)
-    res.render("Show")
-});
-
 //New Route
 
-app.get("/logs/new", (req, res) => {
-    res.render("New");
-});
+app.get('/logs/new', (req, res) => {
+    res.render('New')
+})
 
-
-//Create Route
-app.post("/logs", (req,res) => {
-    Logs.create(req.body, (error, createdLog)=> {
-        res.send(createdLog);
-    })
-   
-});
-
-//Edit Route
-app.get("/logs/:id/edit", (req,res) => {
-    Logs.findById(req.params.id, (err, found) => {
-        res.render("/logs/Edit", {
-            logs: foundLogs
-        });
+//Delete Route
+app.delete("/logs/:id", (req, res) => {
+    Logs.findByIdAndremove(req.params.id, req.body, (err, deletedLogs) => {
+        console.log(updatedLogs)
+        res.redirect(`/logs`);
     });
 });
 
@@ -75,13 +59,38 @@ app.put("/logs/:id", (req, res) => {
     });
 });
 
-//Delete Route
-app.delete("/logs/:id", (req, res) => {
-    Logs.findByIdAndremove(req.params.id, req.body, (err, deletedLogs) => {
-        console.log(updatedLogs)
-        res.redirect(`/logs`);
+
+//Create Route
+app.post("/logs", (req,res) => {
+    Logs.create(req.body, (error, createdLog)=> {
+        res.redirect('/logs');
+    })
+   
+});
+
+//Edit Route
+app.get("/logs/:id/edit", (req,res) => {
+    Logs.findById(req.params.id, (err, found) => {
+        res.render("Edit", {
+            logs: foundLogs
+        });
     });
 });
+
+//Show Route
+app.get("/logs/:id", (req, res) => {
+    Logs.findById(req.params.id)
+    res.render("Show")
+});
+
+
+
+
+
+
+
+
+
 
 
 app.listen(3000, () => {

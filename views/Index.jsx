@@ -3,31 +3,26 @@ import logs from '../models/logs'
 
 export default class Index extends Component {
   render() {
-    const logs = this.props.logs;
+    // const logs = this.props.logs;
     return (
-      
       <div>
         <h1> Logs</h1>
         <body>
         <nav> 
-            <a href="/logs"> Return </a>
+            <a href="/logs/new"> Create New Entry </a>
         </nav>
             <ul>
-                {logs.default.map((logs, i) => {
-                    return (  <li>
-                        <a href={`/logs/${logs.id}`}>
+                {this.props.logs.map((logs, i) => {
+                    return (  <li key = {i}>
+                        <a href={`/logs/${logs.id}`}> 
                          {logs.title}
-                        </a>
-                     </li>)
+                         </a>
+                         {logs.entry}
+                     </li>
+                     )
                 })}
             </ul>
-
-
         </body>
-
-
-
-
       </div>
     )
   }

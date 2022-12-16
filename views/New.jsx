@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logs from '../models/logs'
+
 
 export default class New extends Component {
   render() {
@@ -7,9 +7,9 @@ export default class New extends Component {
       <div>
         <h1> New Page</h1>
         <form action="/logs" method ="POST">
-            Title: <input type ="text" name ="title"/> <br/>
-            Entry: <input type = "textarea" name="entry"/> <br />
-            Ship is Broken: <input type = "checkbox" name="shipIsBroken"/><br />
+            Title: <input type ="text" name ="title" /> <br/>
+            Entry: <input type = "textarea" name="entry" /> <br />
+            Ship is Broken: <input type = "checkbox" name="shipIsBroken" /><br />
             <input type = "submit" value="Submit"></input>
         </form>
 
