@@ -6,9 +6,6 @@ const mongoose = require("mongoose");
 const Logs = require("./models/logs");
 const logs = require('./models/logs');
 
-
-
-
 app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
 
@@ -45,7 +42,7 @@ app.get('/logs/new', (req, res) => {
 
 //Delete Route
 app.delete("/logs/:id", (req, res) => {
-    Logs.findByIdAndremove(req.params.id, req.body, (err, deletedLogs) => {
+    Logs.findByIdAndRemove(req.params.id, req.body, (err, deletedLogs) => {
         console.log(updatedLogs)
         res.redirect(`/logs`);
     });
@@ -61,16 +58,32 @@ app.put("/logs/:id", (req, res) => {
 
 
 //Create Route
-app.post("/logs", (req,res) => {
-    Logs.create(req.body, (error, createdLog)=> {
-        res.redirect('/logs');
-    })
+// app.post("/logs", (req,res) => {
+//     Logs.create(req.body, (error, createdLog)=> {
+//         res.redirect('/logs');
+//     })
    
-});
+// });
+
+app.post('/logs', (req, res) => {
+    //DESTRUCTURING to take the request body and save it's properties to individual varaibles 
+    // this is so I can process the checkbox
+    //curly braces is not creating an object, but telling js to take these properties and assign them to a new
+    const {title, entry, shipIsBroken} = req.body
+    const logBody = {
+        title,
+        entry,
+        shipIsBroken : !shipIsBroken? false: true
+    }
+    Logs.create(logBody, (error, createdLog) =>{
+        res.redirect('/logs')
+    })
+})
+
 
 //Edit Route
 app.get("/logs/:id/edit", (req,res) => {
-    Logs.findById(req.params.id, (err, found) => {
+    Logs.findById(req.params.id, (err, foundLogs) => {
         res.render("Edit", {
             logs: foundLogs
         });
@@ -82,16 +95,6 @@ app.get("/logs/:id", (req, res) => {
     Logs.findById(req.params.id)
     res.render("Show")
 });
-
-
-
-
-
-
-
-
-
-
 
 app.listen(3000, () => {
     console.log("Listening");

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import logs from '../models/logs'
 
-export default class Index extends Component {
+
+class Index extends Component {
   render() {
     // const logs = this.props.logs;
     return (
