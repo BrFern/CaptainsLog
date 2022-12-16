@@ -3,7 +3,9 @@ import Logs from '../models/logs';
 
 export default class Index extends Component {
   render() {
+    const logs = this.props.logs;
     return (
+      
       <div>
         <h1> Logs</h1>
         <body>

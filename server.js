@@ -52,6 +52,11 @@ app.post("/logs", (req,res) => {
    
 });
 
+//Show Route
+app.get("/logs/:index", (req, res) => {
+    res.render("Show")
+});
+
 app.listen(3000, () => {
     console.log("Listening");
 });
