@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import logs from '../models/logs'
 
 export default class New extends Component {
   render() {

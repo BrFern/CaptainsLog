@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Logs from '../models/logs';
+import logs from '../models/logs'
 
 export default class Index extends Component {
   render() {
